@@ -18,9 +18,7 @@ public class employee extends person {
     private Date birthDate;
     private Gender gender;
     private String nacionality;
-    private String contactNumber;
     private String email;
-    private String address;
     private Date joining;
     private String emergencyContact;
 }

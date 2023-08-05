@@ -10,8 +10,8 @@ import lombok.Setter;
 public class ticket {
     private String code;
     private employee idEmployee;
-    private guest idGuest;
-    private room idRoom;
+    private client idClient;
+    private service idService;
     private Date init;
     private double total;
 }
