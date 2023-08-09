@@ -1,4 +1,4 @@
-package my.project.minihostel.routes;
+package my.project.mininetservice.routes;
 
 public interface router {
 

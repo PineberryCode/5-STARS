@@ -1,4 +1,4 @@
-package my.project.minihostel.model;
+package my.project.mininetservice.model;
 
 import lombok.Getter;
 import lombok.Setter;

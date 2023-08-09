@@ -1,11 +1,10 @@
-package my.project.minihostel.controller;
+package my.project.mininetservice.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import my.project.minihostel.controller.util.global;
-import my.project.minihostel.routes.router;
+import my.project.mininetservice.routes.router;
 
 @Controller
 public class contactUsController {

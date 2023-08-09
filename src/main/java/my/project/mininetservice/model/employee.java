@@ -1,4 +1,4 @@
-package my.project.minihostel.model;
+package my.project.mininetservice.model;
 
 import java.util.Date;
 
@@ -18,7 +18,6 @@ public class employee extends person {
     private Date birthDate;
     private Gender gender;
     private String nacionality;
-    private String email;
     private Date joining;
     private String emergencyContact;
 }

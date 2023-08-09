@@ -1,4 +1,4 @@
-package my.project.minihostel;
+package my.project.mininetservice;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

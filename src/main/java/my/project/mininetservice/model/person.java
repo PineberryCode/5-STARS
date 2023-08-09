@@ -1,4 +1,4 @@
-package my.project.minihostel.model;
+package my.project.mininetservice.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,5 +10,6 @@ public abstract class person {
     private String lastname;
     private String names;
     private String contactNumber;
+    private String email;
     private String address;
 }

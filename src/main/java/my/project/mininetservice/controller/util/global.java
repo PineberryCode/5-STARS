@@ -1,4 +1,4 @@
-package my.project.minihostel.controller.util;
+package my.project.mininetservice.controller.util;
 
 import org.springframework.ui.Model;
 

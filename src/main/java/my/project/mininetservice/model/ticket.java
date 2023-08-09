@@ -1,4 +1,4 @@
-package my.project.minihostel.model;
+package my.project.mininetservice.model;
 
 import java.util.Date;
 
@@ -11,7 +11,7 @@ public class ticket {
     private String code;
     private employee idEmployee;
     private client idClient;
-    private service idService;
+    private ownService idService;
     private Date init;
     private double total;
 }
