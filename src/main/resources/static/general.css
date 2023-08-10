@@ -6,11 +6,20 @@ body {
     font-family: "Pirrata", sans-serif;
 }
 
+@font-face {
+    font-family: 'Pirrata';
+    src: url("/static/font/Pirrata.otf");
+}
+
+/*
+ * http://.../Contact Us
+ */
 p {
     text-align: center;
 }
 
-@font-face {
-    font-family: 'Pirrata';
-    src: url("/static/font/Pirrata.otf");
+#txtArea-01 {
+    max-height: 100px;
+    max-width: 1000px;
+    resize: vertical;
 }
