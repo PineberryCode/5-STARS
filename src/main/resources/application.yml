@@ -1,8 +1,8 @@
 spring:
   mail:
     host: smtp.gmail.com
-    username: [Your e-mail]
-    password: [Application password]
+    username: projectsbygithub@gmail.com
+    password: ffyvmtvqezavwzqo
     port: 587
     properties:
       mail:
