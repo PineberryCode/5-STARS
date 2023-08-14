@@ -35,3 +35,4 @@ build/
 ### PROJECT ###
 /src/test/*
 HELP.md
+#src/main/resources/application.yml
