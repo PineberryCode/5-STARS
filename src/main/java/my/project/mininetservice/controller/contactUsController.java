@@ -16,14 +16,14 @@ import my.project.mininetservice.routes.router;
 @Controller
 public class contactUsController {
 
+    private emailService mssger;
+
     @GetMapping("/contactUs")
     private String contactUs (Model model) {
         model.addAttribute("ItemActived03", "contactUs");
-        model.addAttribute("resultMessage", "Recommendation sent!");
+        model.addAttribute("resultMessage", emailService.msgRecommendation);
         return router.CONTACT_US;
     }
-
-    private emailService mssger;
 
     public contactUsController (emailService mssger) {
         this.mssger = mssger;

@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json()
         .then(data => {
             switch (data.recommendationSent) {
-                case "Recommendation sent":
+                case 'Your Recommendation had been sent.':
                     toast.show();
                     break;
                 default:
