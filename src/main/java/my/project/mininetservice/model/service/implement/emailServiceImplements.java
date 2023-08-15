@@ -6,6 +6,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.mail.internet.MimeMessage;
@@ -20,11 +21,15 @@ public class emailServiceImplements implements emailService {
     @Value("${spring.mail.username}")
     private String fromEmail;
 
+    MimeMessage mimeMessage;
+    MimeMessageHelper mimeMessageHelper;
+
     @Override
-    public String sendMail(MultipartFile[] file, String to, String[] cc, String subject, String body) {
+    public String sendMail(MultipartFile[] file, String to, String[] cc, 
+                            String subject, String body) {
         try {
-            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+            mimeMessage = javaMailSender.createMimeMessage();
+            mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
             
             mimeMessageHelper.setFrom(fromEmail);
             mimeMessageHelper.setTo(to);
@@ -42,6 +47,34 @@ public class emailServiceImplements implements emailService {
             javaMailSender.send(mimeMessage);
 
             return "mail sent";
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    @Override
+    public String sendRecommendation(String email, String lastname, 
+                                    String names, String comment) {
+        try {
+            mimeMessage = javaMailSender.createMimeMessage();
+            mimeMessageHelper = new MimeMessageHelper(mimeMessage, false);
+            
+            mimeMessageHelper.setFrom(fromEmail);
+            mimeMessageHelper.setTo("mindlunnyfalse@gmail.com");
+            mimeMessageHelper.setCc(email);
+            mimeMessageHelper.setSubject("Recommendation");
+
+            String body =   "Email: "+email+"\n"+
+                            "Lastname: "+lastname+"\n"+
+                            "Names: "+names+"\n"+
+                            "Comment: "+comment;
+
+            mimeMessageHelper.setText(body);
+
+            javaMailSender.send(mimeMessage);
+
+            return "Recommendation sent";
 
         } catch (Exception e) {
             throw new RuntimeException(e);

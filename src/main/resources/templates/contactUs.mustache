@@ -1,5 +1,4 @@
 {{>layout/main}}
-
 <div class="text-center p-5 m-5">
     <h2>Contact Us</h2>
 </div>
@@ -15,7 +14,7 @@
                   </h2>
                   <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
-                        <form class="justify-content-center m-5" action="">
+                        <form id="formServices" class="justify-content-center m-5" action="" method="POST">
                             <div class="input-group mb-3">
                                 <span class="input-group-text px-4" id="inputGroup-sizing-default">E-mail</span>
                                 <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
@@ -59,31 +58,27 @@
                   </h2>
                   <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
-                        <form class="justify-content-center m-5" action="">
+                        <form id="formRecommendation" class="justify-content-center m-5" action="/sendRecommendation" method="POST">
                             <div class="input-group mb-3">
                                 <span class="input-group-text px-4" id="inputGroup-sizing-default">E-mail</span>
-                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Phone</span>
-                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                <input name="email" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="inputGroup-sizing-default">Lastname</span>
-                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                <input name="lastname" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="inputGroup-sizing-default">Names</span>
-                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                <input name="names" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="form-floating">
-                                    <textarea class="form-control" id="txtArea-01" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                                    <textarea name="comment" class="form-control" id="txtArea-01" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
                                     <label for="floatingTextarea">Comments</label>
                                 </div>
                             </div>
                             <div class="box-footer text-center">
-                                <button type="submit" class="btn btn-primary px-4">Send</button>
+                                <button id="submitBtn" type="submit" class="btn btn-primary px-4">Send</button>
                             </div>
                         </form>
                     </div>
@@ -97,7 +92,7 @@
                   </h2>
                   <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
-                        <form class="justify-content-center m-5" action="">
+                        <form id="formComplaints" class="justify-content-center m-5" action="/sendComplaint" method="POST">
                             <div class="input-group mb-3">
                                 <span class="input-group-text px-4" id="inputGroup-sizing-default">E-mail</span>
                                 <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
@@ -147,6 +142,19 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">E-mail</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        {{#resultMessage}}
+            {{resultMessage}}
+        {{/resultMessage}}
+      </div>
     </div>
 </div>
 
