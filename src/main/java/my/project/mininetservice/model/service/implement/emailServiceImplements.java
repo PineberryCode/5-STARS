@@ -1,18 +1,24 @@
 package my.project.mininetservice.model.service.implement;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.mail.Multipart;
 import jakarta.mail.internet.MimeMessage;
 import my.project.mininetservice.model.service.emailService;
 
 @Service
 public class emailServiceImplements implements emailService {
+
+    private String noReplyGMAIL = "mindlunnyfalse@gmail.com";
 
     @Autowired
     private JavaMailSender javaMailSender;
@@ -24,7 +30,7 @@ public class emailServiceImplements implements emailService {
     MimeMessageHelper mimeMessageHelper;
 
     @Override
-    public String sendMail(MultipartFile[] file, String to, String[] cc, 
+    public String sendMail (MultipartFile[] file, String to, String[] cc, 
                             String subject, String body) {
         try {
             mimeMessage = javaMailSender.createMimeMessage();
@@ -53,14 +59,14 @@ public class emailServiceImplements implements emailService {
     }
     
     @Override
-    public String sendRecommendation(String email, String lastname, 
-                                    String names, String comment) {
+    public String sendRecommendation (  String email, String lastname, 
+                                        String names, String comment) {
         try {
             mimeMessage = javaMailSender.createMimeMessage();
             mimeMessageHelper = new MimeMessageHelper(mimeMessage, false);
             
             mimeMessageHelper.setFrom(fromEmail);
-            mimeMessageHelper.setTo("mindlunnyfalse@gmail.com");
+            mimeMessageHelper.setTo(noReplyGMAIL);
             mimeMessageHelper.setCc(email);
             mimeMessageHelper.setSubject("Recommendation");
 
@@ -74,6 +80,70 @@ public class emailServiceImplements implements emailService {
             javaMailSender.send(mimeMessage);
 
             return emailService.msgRecommendation;
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public String sendComplaint(String email, String phone, String lastname, 
+                                String names, MultipartFile[] file, String comment) {
+        try {
+            mimeMessage = javaMailSender.createMimeMessage();
+            mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+
+            mimeMessageHelper.setFrom(fromEmail);
+            mimeMessageHelper.setTo(noReplyGMAIL);
+            mimeMessageHelper.setCc(email);
+            mimeMessageHelper.setSubject("Complaint!");
+
+            String body =   "E-mail: "+email+"\n"+
+                            "Phone: "+phone+"\n"+
+                            "Lastname: "+lastname+"\n"+
+                            "Names: "+names+"\n"+
+                            "Comment: "+comment;
+            mimeMessageHelper.setText(body);
+
+            for (int k=0; k < file.length; k++){
+                mimeMessageHelper.addAttachment(
+                    file[k].getOriginalFilename(),
+                    new ByteArrayResource(file[k].getBytes())
+                );
+            }
+
+            javaMailSender.send(mimeMessage);
+
+            return emailService.msgComplaints;
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public String sendConsultation( String email, String phone, String lastname, 
+                                    String names, String services) {
+        try {
+            mimeMessage = javaMailSender.createMimeMessage();
+            mimeMessageHelper = new MimeMessageHelper(mimeMessage, false);
+
+            mimeMessageHelper.setFrom(fromEmail);
+            mimeMessageHelper.setTo(noReplyGMAIL);
+            mimeMessageHelper.setCc(email);
+            mimeMessageHelper.setSubject("Consultation");
+
+            String body =   "E-mail: "+email+"\n"+
+                            "Phone: "+phone+"\n"+
+                            "Lastname: "+lastname+"\n"+
+                            "Names: "+names+"\n"+
+                            "Consultation about "+services.toString();
+
+            mimeMessageHelper.setText(body);
+
+            javaMailSender.send(mimeMessage);
+            
+            return emailService.msgServices;
 
         } catch (Exception e) {
             throw new RuntimeException(e);
