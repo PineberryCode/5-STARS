@@ -22,7 +22,7 @@ public class contactUsController {
     @GetMapping("/contactUs")
     private String contactUs (Model model) {
         model.addAttribute("ItemActived03", "contactUs");
-        model.addAttribute("resultMessage");
+        model.addAttribute("resultMessage", "Successfully email sent!"); //Improve this
         return router.CONTACT_US;
     }
 
@@ -38,6 +38,7 @@ public class contactUsController {
                                                     @RequestParam(name="comment") String comment) {
         
         String resultMessage = mssger.sendRecommendation(emailUser,lastname,names,comment);
+        
         Map<String, String> response = new HashMap<>();
         response.put("resultMessage", resultMessage);
 
@@ -53,8 +54,10 @@ public class contactUsController {
                                                 @RequestParam(name="file") MultipartFile[] file,
                                                 @RequestParam(name="comment") String comment) {
         String resultMessage = mssger.sendComplaint(emailUser, phone, lastname, names, file, comment);
+        
         Map<String, String> response = new HashMap<>();
         response.put("resultMessage", resultMessage);
+        
         return response;
     }
 
@@ -66,8 +69,10 @@ public class contactUsController {
                                                 @RequestParam(name="names") String names,
                                                 @RequestParam(name="groupServices") String services) {
         String resultMessage = mssger.sendConsultation(email, phone, lastname, names, services);
+        
         Map<String, String> response = new HashMap<>();
         response.put("resultMessage", resultMessage);
+
         return response;
     }
 

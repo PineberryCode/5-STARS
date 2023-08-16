@@ -1,17 +1,13 @@
 package my.project.mininetservice.model.service.implement;
 
-import java.io.File;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.mail.Multipart;
 import jakarta.mail.internet.MimeMessage;
 import my.project.mininetservice.model.service.emailService;
 
@@ -142,7 +138,7 @@ public class emailServiceImplements implements emailService {
             mimeMessageHelper.setText(body);
 
             javaMailSender.send(mimeMessage);
-            
+
             return emailService.msgServices;
 
         } catch (Exception e) {
