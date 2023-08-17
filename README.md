@@ -2,7 +2,11 @@
 
 It is a web page about net services (Optical Fiber and classic Wi-Fi).
 
-Set the file **application.yml**; _username_ and _password_:
+Create the file **application.yml** in this route:
+```txt 
+/src/main/resources/
+```
+Then paste this code in the file **application.yml**:
 
 ```YML
 spring:
