@@ -2,7 +2,7 @@
 
 It is a web page about net services (Optical Fiber and classic Wi-Fi).
 
-To that sending of E-mails, works shall create a file called **application** 'cause the Maven archetype can only read the word "reserved". It's preferable to make another file with the extension _.yml_ for more order.
+To that sending of E-mails, You shall create a configuration file called **application** because the Maven archetype only recognizes that "reserved" term. It's preferable to make another file with the extension _.yml_ this approach enhances the overall project structure.
 
 Make sure to create the file on this route. Specifically **/resources**:
 
