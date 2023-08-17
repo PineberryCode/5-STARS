@@ -9,7 +9,7 @@ spring:
   mail:
     host: smtp.gmail.com
     username: Your Email
-    password: Application password
+    password: Application password (GMAIL)
     port: 587
     properties:
       mail:
