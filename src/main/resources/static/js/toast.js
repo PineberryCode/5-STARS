@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var submitBtn = document.querySelector(".submitBtn");
             submitBtn.disabled = true;
     
-            var urls = ['/sendConsultation','/sendRecommendation','/sendComplaint'];
+            var urls = ['/global/contactUs/sendConsultation','/global/contactUs/sendRecommendation','/global/contactUs/sendComplaint'];
     
             Promise.all(urls.map(url =>
                 fetch(url, {

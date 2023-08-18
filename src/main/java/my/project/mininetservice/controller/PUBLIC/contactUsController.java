@@ -1,4 +1,4 @@
-package my.project.mininetservice.controller;
+package my.project.mininetservice.controller.PUBLIC;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +16,7 @@ import my.project.mininetservice.model.service.emailService;
 import my.project.mininetservice.routes.router;
 
 @Controller
+@RequestMapping("/global")
 public class contactUsController {
 
     private emailService mssger;
@@ -30,7 +32,7 @@ public class contactUsController {
         this.mssger = mssger;
     }
 
-    @PostMapping("/sendRecommendation")
+    @PostMapping("/contactUs/sendRecommendation")
     @ResponseBody
     public Map<String, String> sendRecomendation (  @RequestParam(name="email") String emailUser,
                                                     @RequestParam(name="lastname") String lastname,
@@ -45,7 +47,7 @@ public class contactUsController {
         return response;
     }
 
-    @PostMapping("/sendComplaint")
+    @PostMapping("/contactUs/sendComplaint")
     @ResponseBody
     public Map<String, String> sendComplaint (  @RequestParam(name="email") String emailUser,
                                                 @RequestParam(name="phone") String phone,
@@ -61,7 +63,7 @@ public class contactUsController {
         return response;
     }
 
-    @PostMapping("/sendConsultation")
+    @PostMapping("/contactUs/sendConsultation")
     @ResponseBody
     public Map<String, String> sendConsultation(@RequestParam(name="email") String email,
                                                 @RequestParam(name="phone") String phone,
