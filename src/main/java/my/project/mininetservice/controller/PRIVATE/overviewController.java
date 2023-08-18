@@ -8,10 +8,9 @@ import my.project.mininetservice.routes.router;
 
 @Controller
 @RequestMapping("/restricted")
-public class loginController {
-    @GetMapping("/login")
-    private String login () {
-        return router.LOG_IN;
+public class overviewController {
+    @GetMapping("/overview")
+    private String Overview () {
+        return router.OVERVIEW;
     }
-
 }
