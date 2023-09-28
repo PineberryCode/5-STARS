@@ -1,4 +1,4 @@
-package my.project.mininetservice.model.service.implement;
+package my.project.mininetservice.service.implement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.mail.internet.MimeMessage;
-import my.project.mininetservice.model.service.emailService;
+import my.project.mininetservice.service.EmailService;
 
 @Service
-public class emailServiceImplements implements emailService {
+public class EmailServiceImplements implements EmailService {
 
     private String noReplyGMAIL = "mindlunnyfalse@gmail.com";
 
@@ -75,7 +75,7 @@ public class emailServiceImplements implements emailService {
 
             javaMailSender.send(mimeMessage);
 
-            return emailService.msgRecommendation;
+            return EmailService.msgRecommendation;
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -110,7 +110,7 @@ public class emailServiceImplements implements emailService {
 
             javaMailSender.send(mimeMessage);
 
-            return emailService.msgComplaints;
+            return EmailService.msgComplaints;
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -139,7 +139,7 @@ public class emailServiceImplements implements emailService {
 
             javaMailSender.send(mimeMessage);
 
-            return emailService.msgServices;
+            return EmailService.msgServices;
 
         } catch (Exception e) {
             throw new RuntimeException(e);

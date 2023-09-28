@@ -1,7 +1,7 @@
-{{>layout/mainRestricted}}
+{{ >layout/mainRestricted}}
 
 <div class="container d-flex justify-content-center align-items-center vh-100 p-5">
-    <form class="justify-content-center" action="/restricted/login/loguearse" method="POST">
+    <form class="justify-content-center" action="/restricted/admin/login" method="POST">
         <div class="card m-5" style="width: 20rem;">
             <div class="card-body text-center">
                 <h5 class="card-title">Log In</h5>
@@ -13,7 +13,7 @@
                     <input name="password" type="password" class="form-control" id="floatingInput" placeholder="Password">
                     <label for="floatingInput">Password</label>
                 </div>
-                <a href="#" class="btn btn-primary">Log In</a>
+                <button type="submit" class="btn btn-primary">Log In</button>
             </div>
         </div>
     </form>

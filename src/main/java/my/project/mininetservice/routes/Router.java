@@ -1,6 +1,6 @@
 package my.project.mininetservice.routes;
 
-public interface router {
+public interface Router {
 
     public static final String WELCOME = "welcome";
     public static final String SERVICES = "services";

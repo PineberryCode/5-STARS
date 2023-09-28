@@ -5,6 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class client extends person {
-    
+public class JobRole {
+    private int code;
+    private String role;
+    private double salary;
 }

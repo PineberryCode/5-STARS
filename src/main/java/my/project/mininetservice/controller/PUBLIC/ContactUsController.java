@@ -12,23 +12,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import my.project.mininetservice.model.service.emailService;
-import my.project.mininetservice.routes.router;
+import my.project.mininetservice.routes.Router;
+import my.project.mininetservice.service.EmailService;
 
 @Controller
 @RequestMapping("/global")
-public class contactUsController {
+public class ContactUsController {
 
-    private emailService mssger;
+    private EmailService mssger;
 
     @GetMapping("/contactUs")
     private String contactUs (Model model) {
         model.addAttribute("ItemActived03", "contactUs");
         model.addAttribute("resultMessage", "Successfully email sent!"); //Improve this
-        return router.CONTACT_US;
+        return Router.CONTACT_US;
     }
 
-    public contactUsController (emailService mssger) {
+    public ContactUsController (EmailService mssger) {
         this.mssger = mssger;
     }
 

@@ -1,5 +1,5 @@
 package my.project.mininetservice.data;
 
-public interface params {
+public interface Params {
     
 }

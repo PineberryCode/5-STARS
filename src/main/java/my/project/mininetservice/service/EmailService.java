@@ -1,8 +1,8 @@
-package my.project.mininetservice.model.service;
+package my.project.mininetservice.service;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public interface emailService {
+public interface EmailService {
     
     static String msgRecommendation = "Your Recommendation had been sent.";
     static String msgComplaints = "Your Complaints had been sent.";

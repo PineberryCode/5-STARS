@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ownService {
+public class OwnService {
     private int code;
     private String idEmployee;
     private int technology; //wan, fibra, satelite

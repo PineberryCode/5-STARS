@@ -7,11 +7,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ticket {
+public class Ticket {
     private String code;
-    private employee idEmployee;
-    private client idClient;
-    private ownService idService;
+    private Employee idEmployee;
+    private Client idClient;
+    private OwnService idService;
     private Date init;
     private double total;
 }

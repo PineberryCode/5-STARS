@@ -12,8 +12,8 @@ enum Gender {
 
 @Getter
 @Setter
-public class employee extends person {
-    private jobRole roleAndSalary;
+public class Employee extends Person {
+    private JobRole roleAndSalary;
     private String workShift;
     private Date birthDate;
     private Gender gender;

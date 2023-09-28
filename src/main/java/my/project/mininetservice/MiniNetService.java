@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class MiniHostelApplication implements CommandLineRunner {
+public class MiniNetService implements CommandLineRunner {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MiniHostelApplication.class, args);
+		SpringApplication.run(MiniNetService.class, args);
 	}
 
 	@Override
