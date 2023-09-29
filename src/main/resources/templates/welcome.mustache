@@ -1,6 +1,14 @@
-{{>layout/main}}
-
-<div class="text-center p-5 m-5">
+<!DOCTYPE html>
+<html lang="en">
+<html>
+  <head>
+    {{> partials/header}}
+  </head>
+  <body>
+    <header>
+      {{> partials/naving}}
+    </header>
+    <div class="text-center p-5 m-5">
     <h1>MINI NETSERVICE</h1>
 </div>
 <div class="container">
@@ -67,5 +75,8 @@
         </button>
       </div>
 </div>
-
-{{>partials/ending}}
+    <footer>
+      {{> partials/ending}}
+    </footer>
+  </body>
+</html>

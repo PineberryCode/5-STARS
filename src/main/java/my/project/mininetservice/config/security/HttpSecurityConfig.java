@@ -50,6 +50,7 @@ public class HttpSecurityConfig {
 
             //authConfig.requestMatchers(HttpMethod.GET, "/restricted/admin/overview").hasAuthority(Permission.READ_OVERVIEW.name());
             authConfig.requestMatchers(HttpMethod.GET, "/restricted/admin/overview").permitAll();
+            authConfig.requestMatchers(HttpMethod.GET, "/static/restricted.css").permitAll();
 
             authConfig.anyRequest().denyAll();
         });

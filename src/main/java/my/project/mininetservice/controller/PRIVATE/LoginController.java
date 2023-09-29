@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import my.project.mininetservice.dto.AuthenticationRequest;
 import my.project.mininetservice.dto.AuthenticationResponse;
-import my.project.mininetservice.routes.Router;
+import my.project.mininetservice.routes.Render;
 import my.project.mininetservice.service.AuthenticationService;
 
 @Controller
@@ -37,7 +37,7 @@ public class LoginController {
 
     @GetMapping("/admin")
     public String login () {
-        return Router.LOG_IN;
+        return Render.LOG_IN;
     }
 
     @PostMapping("/admin/login")
@@ -48,7 +48,7 @@ public class LoginController {
     public String login (@RequestParam("username") String username, @RequestParam("password") String password) {
         if (username.equals("admin") && password.equals("123")) {
             System.out.println("IF "+request.getHttpServletMapping());
-            return "redirect:/restricted/admin/"+Router.OVERVIEW;
+            return "redirect:/restricted/admin/"+Render.OVERVIEW;
         } else {
             System.out.println(request.getHttpServletMapping());
             return "Incorrect credentials";

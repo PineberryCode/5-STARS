@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="CLIENT_TABLE")
+@Table(name="CLIENT_TABLE", schema = "public")
 @Getter
 @Setter
 public class Client extends Person {

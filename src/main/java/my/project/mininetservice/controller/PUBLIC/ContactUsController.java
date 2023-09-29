@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import my.project.mininetservice.routes.Router;
+import my.project.mininetservice.routes.Render;
 import my.project.mininetservice.service.EmailService;
 
 @Controller
@@ -25,7 +25,7 @@ public class ContactUsController {
     private String contactUs (Model model) {
         model.addAttribute("ItemActived03", "contactUs");
         model.addAttribute("resultMessage", "Successfully email sent!"); //Improve this
-        return Router.CONTACT_US;
+        return Render.CONTACT_US;
     }
 
     public ContactUsController (EmailService mssger) {
