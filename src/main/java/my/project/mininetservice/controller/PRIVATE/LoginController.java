@@ -22,7 +22,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import my.project.mininetservice.dto.AuthenticationRequest;
 import my.project.mininetservice.dto.AuthenticationResponse;
-import my.project.mininetservice.model.TokenJWT;
 import my.project.mininetservice.routes.Router;
 import my.project.mininetservice.service.AuthenticationService;
 
@@ -36,16 +35,23 @@ public class LoginController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @PreAuthorize("permitAll")
     @GetMapping("/admin")
     public String login () {
         return Router.LOG_IN;
     }
 
-    @PreAuthorize("permitAll")
     @PostMapping("/admin/login")
-    public ResponseEntity<AuthenticationResponse> validate (@RequestBody @Valid AuthenticationRequest authenticationRequest) {
+    /*public ResponseEntity<AuthenticationResponse> login (@RequestBody @Valid AuthenticationRequest authenticationRequest) {
         AuthenticationResponse jwt = authenticationService.login(authenticationRequest);
         return ResponseEntity.ok(jwt);
+    }*/
+    public String login (@RequestParam("username") String username, @RequestParam("password") String password) {
+        if (username.equals("admin") && password.equals("123")) {
+            System.out.println("IF "+request.getHttpServletMapping());
+            return "redirect:/restricted/admin/"+Router.OVERVIEW;
+        } else {
+            System.out.println(request.getHttpServletMapping());
+            return "Incorrect credentials";
+        }
     }
 }

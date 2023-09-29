@@ -28,12 +28,36 @@ public class HttpSecurityConfig {
         httpSecurity
         .csrf(csrfConfig -> csrfConfig.disable())
         .sessionManagement(sessionManagementConfig -> sessionManagementConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authenticationProvider(authenticationProvider);
-        //.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        .authenticationProvider(authenticationProvider)
+        .authorizeHttpRequests(authConfig -> {
+            authConfig.requestMatchers(HttpMethod.POST, "/restricted/admin/login").permitAll();
+            authConfig.requestMatchers(HttpMethod.GET, "/global/welcome").permitAll();
+            authConfig.requestMatchers(HttpMethod.GET, "/global/contactUs").permitAll();
+            authConfig.requestMatchers(HttpMethod.POST, "/global/contactUs/sendRecommendation").permitAll();
+            authConfig.requestMatchers(HttpMethod.POST, "/global/contactUs/sendComplaint").permitAll();
+            authConfig.requestMatchers(HttpMethod.POST, "/global/contactUs/sendConsultation").permitAll();
+            authConfig.requestMatchers(HttpMethod.GET, "/global/services").permitAll();
+            authConfig.requestMatchers(HttpMethod.GET, "/restricted/admin").permitAll(); //login
+            authConfig.requestMatchers("/error").permitAll();
+            /*
+             * Static
+             */
+            authConfig.requestMatchers(HttpMethod.GET,"/static/global.css").permitAll();
+            authConfig.requestMatchers(HttpMethod.GET,"/static/bootstrap.min.css").permitAll();
+            authConfig.requestMatchers(HttpMethod.GET,"/static/js/toast.js").permitAll();
+            authConfig.requestMatchers(HttpMethod.GET,"/static/img/SaitamaBelowTheRain.jpg").permitAll();
+            authConfig.requestMatchers(HttpMethod.GET,"/static/font/Pirrata.otf").permitAll();
+
+            //authConfig.requestMatchers(HttpMethod.GET, "/restricted/admin/overview").hasAuthority(Permission.READ_OVERVIEW.name());
+            authConfig.requestMatchers(HttpMethod.GET, "/restricted/admin/overview").permitAll();
+
+            authConfig.anyRequest().denyAll();
+        });
+        
         return httpSecurity.build();
     }
 
-    private static Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> builderRequestMatchers () {
+    /*private static Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> builderRequestMatchers () {
         return authConfig -> {
             authConfig.requestMatchers(HttpMethod.POST, "/auth/authenticate").permitAll();
             authConfig.requestMatchers(HttpMethod.POST, "/restricted/admin/login").permitAll();
@@ -47,6 +71,6 @@ public class HttpSecurityConfig {
 
             authConfig.anyRequest().denyAll();
         };
-    }
+    }*/
 
 }

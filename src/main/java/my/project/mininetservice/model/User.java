@@ -28,7 +28,7 @@ import my.project.mininetservice.util.Role;
 @NoArgsConstructor
 @Entity
 @ToString
-@Table(name="USER_TABLE")
+@Table(name="USER_TABLE", schema = "public")
 @Getter
 @Setter
 public class User implements UserDetails {
@@ -37,15 +37,20 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(unique = true)
+    //@Column(name = "EMAIL")
     String email;
 
+    //@Column(name="USERNAME")
     String username;
+    //@Column(name="PASSWORD")
     String password;
 
+    //@Column(name="CREATED_AT")
     LocalDateTime createdAt;
+    //@Column(name="UPDATED_AT")
     LocalDateTime updateAt;
 
+    //@Column(name = "USER_ROLE")
     @Enumerated(EnumType.STRING)
     private Role role;
 
