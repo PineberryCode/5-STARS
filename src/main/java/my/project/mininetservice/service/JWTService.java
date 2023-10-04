@@ -33,14 +33,13 @@ public class JWTService {
         .setSubject(user.getUsername())
         .setIssuedAt(issuedAt)
         .setExpiration(expiration)
-        .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-        .signWith(generateKey(), SignatureAlgorithm.HS256)
+        .setHeaderParam(Header.TYPE, Header.JWT_TYPE) //Building the JWT's header.
+        .signWith(generateKey(), SignatureAlgorithm.HS256) //Building the JWT's signature.
         .compact();
     }
 
     private Key generateKey () {
         byte[] secretAsBytes = Decoders.BASE64.decode(SECRET_KEY);
-        System.out.println("my password is: "+ new String(secretAsBytes)); //Remove then...
         return Keys.hmacShaKeyFor(secretAsBytes);
     }
 

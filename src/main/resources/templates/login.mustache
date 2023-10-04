@@ -1,6 +1,11 @@
-{{ >layout/mainRestricted}}
-
-<div class="container d-flex justify-content-center align-items-center vh-100 p-5">
+<!DOCTYPE html>
+<html lang="en">
+<html>
+    <head>
+        {{> partials/header_restricted}}
+    </head>
+    <body>
+        <div class="container d-flex justify-content-center align-items-center vh-100 p-5">
     <form class="justify-content-center" action="/restricted/admin/login" method="POST">
         <div class="card m-5" style="width: 20rem;">
             <div class="card-body text-center">
@@ -18,3 +23,5 @@
         </div>
     </form>
 </div>
+    </body>
+</html>

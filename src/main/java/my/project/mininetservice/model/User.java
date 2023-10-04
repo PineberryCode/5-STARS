@@ -9,7 +9,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -35,32 +34,22 @@ public class User implements UserDetails {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-
-    //@Column(name = "EMAIL")
+    Long user_id;
     String email;
-
-    //@Column(name="USERNAME")
     String username;
-    //@Column(name="PASSWORD")
     String password;
-
-    //@Column(name="CREATED_AT")
     LocalDateTime createdAt;
-    //@Column(name="UPDATED_AT")
-    LocalDateTime updateAt;
-
-    //@Column(name = "USER_ROLE")
+    LocalDateTime updatedAt;
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Role user_role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() { //What is it?
-        List<GrantedAuthority> authorities = role.getPermissions().stream()
+        List<GrantedAuthority> authorities = user_role.getPermissions().stream()
         .map(permissionEnum -> new SimpleGrantedAuthority(permissionEnum.name()))
         .collect(Collectors.toList());
 
-        authorities.add(new SimpleGrantedAuthority("ROLE_"+role.name()));
+        //authorities.add(new SimpleGrantedAuthority("ROLE_"+user_role.name()));
 
         return authorities;
     }
