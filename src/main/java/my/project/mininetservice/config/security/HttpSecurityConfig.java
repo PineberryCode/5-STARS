@@ -51,7 +51,6 @@ public class HttpSecurityConfig {
             authConfig.requestMatchers(HttpMethod.POST, "/global/contactUs/sendConsultation").permitAll();
             authConfig.requestMatchers(HttpMethod.GET, "/global/services").permitAll();
             authConfig.requestMatchers(HttpMethod.GET, "/restricted/admin").permitAll(); //login
-            authConfig.requestMatchers("/error").permitAll();
 
             /*
              * Static
@@ -65,6 +64,7 @@ public class HttpSecurityConfig {
             authConfig.requestMatchers(HttpMethod.GET, "/static/restricted.css").hasAuthority(Permission.READ_OVERVIEW.name());
             authConfig.requestMatchers(HttpMethod.GET, "/restricted/admin/overview").hasAuthority(Permission.READ_OVERVIEW.name());
 
+            authConfig.requestMatchers("/error").permitAll();
             authConfig.anyRequest().denyAll();
         };
     }

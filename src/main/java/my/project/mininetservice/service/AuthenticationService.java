@@ -6,6 +6,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.context.SecurityContextHolderFilter;
 import org.springframework.stereotype.Service;
 
 import my.project.mininetservice.dto.AuthenticationRequest;
@@ -26,14 +30,28 @@ public class AuthenticationService {
     private JWTService jwtService;
 
     public AuthenticationResponse login (AuthenticationRequest authenticationRequest) {
+        User user = userRepository.findByUsername(authenticationRequest.getUsername()).get();
+        
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-            authenticationRequest.getUsername(), authenticationRequest.getPassword()
+            authenticationRequest.getUsername(), authenticationRequest.getPassword()//,
+            //user.getAuthorities() //Testing
         ); //Authencate just username and password.
         authenticationManager.authenticate(authToken);
-
-        User user = userRepository.findByUsername(authenticationRequest.getUsername()).get();
+        //System.out.println("Authorities: "+authToken.getAuthorities());
+        
+        //Checked System.out.println("From AuthenticationResponse: "+user.getUsername()+"Role: "+user.getUser_role().getPermissions());
+        SecurityContextHolder.getContext().setAuthentication(authToken);
         String jwt = jwtService.generateToken(user, generateExtraClaims(user));
-
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("Usuario autenticado: " + authentication.getName());
+        System.out.println("Roles: " + authentication.getAuthorities());
+        
+        /*System.out.println("Usuario  02: " + authentication.getName());
+        System.out.println("Roles 02: " + authentication.getAuthorities());*/
+        //authentication.setAuthenticated(false);
+        //Checked System.out.println("From Auth JWT -> "+jwt);
+        //SecurityContextHolder.getContext().setAuthentication(authToken); //<--
+        //SecurityContextHolder.getContext().setAuthentication(authToken);
         return new AuthenticationResponse(jwt);
     }
 

@@ -1,12 +1,18 @@
 package my.project.mininetservice.controller.PRIVATE;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -26,6 +32,7 @@ import jakarta.validation.Valid;
 import my.project.mininetservice.dto.AuthenticationRequest;
 import my.project.mininetservice.dto.AuthenticationResponse;
 import my.project.mininetservice.model.User;
+import my.project.mininetservice.model.repository.UserRepository;
 import my.project.mininetservice.routes.Render;
 import my.project.mininetservice.service.AuthenticationService;
 import my.project.mininetservice.util.Role;
@@ -34,39 +41,32 @@ import my.project.mininetservice.util.Role;
 @RequestMapping("/restricted")
 public class LoginController {
 
-    @Autowired
-    private HttpServletRequest request;
+    @Value("${security.jwt.expiration-minutes}")
+    private int EXPIRATION_MINUTES;
 
     @Autowired
     private AuthenticationService authenticationService;
 
+    private AuthenticationResponse jwt;
+
     @GetMapping("/admin")
     public String login () {
-        System.out.println("Login: "+request.getHeader("Authorization"));
         return Render.LOG_IN;
     }
 
     @PostMapping("/admin/login")
-    public /*String*/ModelAndView login (
+    public String login (
         @RequestParam("username") String username, 
         @RequestParam("password") String password,
         HttpServletResponse response) throws IOException, InterruptedException {
-        AuthenticationResponse jwt = authenticationService.login(new AuthenticationRequest(username,password));
-        
-        if (jwt != null) {
-            response.setHeader("Authorization", "Bearer " + jwt.getJWT());
-            /*Cookie cookie = new Cookie("Authorization", "Bearer " + jwt.getJWT());
-            cookie.setMaxAge(3600); // Duración de la cookie en segundos (por ejemplo, 1 hora)
-            cookie.setPath("http://localhost:5000/restricted/admin/overview"); // La cookie estará disponible para todo el sitio
-            response.addCookie(cookie);*/
-            System.out.println("Hola: "+response.getHeader("Authorization"));
-            //System.out.println("JWTDTO -> "+jwt.getJWT());
-            ModelAndView modelAndView = new ModelAndView("overview");
-            return modelAndView;
-            //return "redirect:/restricted/admin/"+Render.OVERVIEW;
-        } else {
-            //return "Incorrect credentials";
-            return new ModelAndView("incorrectCredentialsPage");
-        }
+        jwt = authenticationService.login(new AuthenticationRequest(username, password));
+
+        Cookie jwtCookie = new Cookie("token", jwt.getJWT());
+
+        jwtCookie.setMaxAge(EXPIRATION_MINUTES*60*1000);
+
+        response.addCookie(jwtCookie);
+
+        return "redirect:/restricted/admin/"+Render.OVERVIEW;
     }
 }
