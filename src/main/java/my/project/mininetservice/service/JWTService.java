@@ -1,6 +1,8 @@
 package my.project.mininetservice.service;
 
 import java.security.Key;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Map;
 
@@ -25,8 +27,11 @@ public class JWTService {
     private String SECRET_KEY;
 
     public String generateToken (User user, Map<String, Object> extraClaims) {
-        Date issuedAt = new Date(System.currentTimeMillis());
-        Date expiration = new Date(issuedAt.getTime()+(EXPIRATION_MINUTES*60*1000));
+
+        LocalDateTime emitedTime = LocalDateTime.now();
+        LocalDateTime expirationTime = emitedTime.plusMinutes(EXPIRATION_MINUTES);
+        Date issuedAt = Date.from(emitedTime.atZone(ZoneId.systemDefault()).toInstant());
+        Date expiration = Date.from(expirationTime.atZone(ZoneId.systemDefault()).toInstant());
 
         return Jwts.builder()
         .setClaims(extraClaims)

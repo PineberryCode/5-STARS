@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -37,9 +36,6 @@ public class AuthenticationService {
     
         SecurityContextHolder.getContext().setAuthentication(authToken);
         String jwt = jwtService.generateToken(user, generateExtraClaims(user));
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("Usuario autenticado: " + authentication.getName());
-        System.out.println("Roles: " + authentication.getAuthorities());
         
         return new AuthenticationResponse(jwt);
     }

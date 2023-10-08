@@ -41,7 +41,7 @@ public class LoginController {
 
         Cookie jwtCookie = new Cookie("token", jwt.getJWT());
 
-        jwtCookie.setMaxAge(EXPIRATION_MINUTES*60*1000);
+        jwtCookie.setMaxAge(EXPIRATION_MINUTES*60);
 
         response.addCookie(jwtCookie);
 
