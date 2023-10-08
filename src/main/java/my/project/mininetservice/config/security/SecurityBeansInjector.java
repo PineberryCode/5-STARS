@@ -32,7 +32,7 @@ public class SecurityBeansInjector {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder () { //Not using
+    public PasswordEncoder passwordEncoder () {
         return new BCryptPasswordEncoder();
     }
 

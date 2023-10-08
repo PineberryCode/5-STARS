@@ -44,7 +44,6 @@ public class JWTService {
     }
 
     public String extractUsername (String jwt) {
-        //System.out.println("Extract: "+jwt);
         return extractAllClaims(jwt).getSubject();
     }
 

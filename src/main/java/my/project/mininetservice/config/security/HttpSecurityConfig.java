@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 
 import my.project.mininetservice.config.security.filter.JWTAuthenticationFilter;
 import my.project.mininetservice.util.Permission;
-import my.project.mininetservice.util.Role;
 
 @Component
 @EnableWebSecurity
