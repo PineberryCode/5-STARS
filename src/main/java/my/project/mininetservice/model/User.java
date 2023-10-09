@@ -49,8 +49,6 @@ public class User implements UserDetails {
         .map(permissionEnum -> new SimpleGrantedAuthority(permissionEnum.name()))
         .collect(Collectors.toList());
 
-        //authorities.add(new SimpleGrantedAuthority("ROLE_"+user_role.name()));
-
         return authorities;
     }
 
