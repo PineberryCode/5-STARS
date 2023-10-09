@@ -25,3 +25,12 @@ spring:
             enable: true
           auth: true
 ```
+
+
+<p><b>Remember</b><p><br>
+
+- - -
+
+Run in your database engine this ![Script](www.google.com)
+
+- - -
