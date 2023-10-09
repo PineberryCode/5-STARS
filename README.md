@@ -27,8 +27,8 @@ spring:
 ```
 
 
-<p><b>Remember</b><p><br>
-
+<p><b>Remember</b><p>
+  
 - - -
 
 Run in your database engine this ![script](https://github.com/PineberryCode/MINI-NETSERVICE/blob/dev/src/main/resources/mininetservicedb.sql)
