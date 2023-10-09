@@ -31,6 +31,6 @@ spring:
 
 - - -
 
-Run in your database engine this ![Script](www.google.com)
+Run in your database engine this ![script](https://github.com/PineberryCode/MINI-NETSERVICE/blob/dev/src/main/resources/mininetservicedb.sql)
 
 - - -
