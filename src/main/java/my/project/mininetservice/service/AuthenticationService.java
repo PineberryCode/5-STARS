@@ -9,7 +9,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import my.project.mininetservice.dto.AuthenticationRequest;
 import my.project.mininetservice.dto.AuthenticationResponse;
 import my.project.mininetservice.model.User;
 import my.project.mininetservice.model.repository.UserRepository;
@@ -26,16 +25,16 @@ public class AuthenticationService {
     @Autowired
     private JWTService jwtService;
 
-    public AuthenticationResponse login (AuthenticationRequest authenticationRequest) {
-        User user = userRepository.findByUsername(authenticationRequest.getUsername()).get();
+    public AuthenticationResponse login (User user) {
+        User sourceUser = userRepository.findByUsername(user.getUsername()).get();
         
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-            authenticationRequest.getUsername(), authenticationRequest.getPassword()
+            user.getUsername(), user.getPassword()
         ); //Authencate just username and password.
         authenticationManager.authenticate(authToken);
     
         SecurityContextHolder.getContext().setAuthentication(authToken);
-        String jwt = jwtService.generateToken(user, generateExtraClaims(user));
+        String jwt = jwtService.generateToken(sourceUser, generateExtraClaims(sourceUser));
         
         return new AuthenticationResponse(jwt);
     }

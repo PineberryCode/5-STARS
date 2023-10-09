@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
-import my.project.mininetservice.dto.AuthenticationRequest;
 import my.project.mininetservice.dto.AuthenticationResponse;
+import my.project.mininetservice.model.User;
 import my.project.mininetservice.routes.Render;
 import my.project.mininetservice.service.AuthenticationService;
 
@@ -37,7 +37,7 @@ public class LoginController {
         @RequestParam("username") String username, 
         @RequestParam("password") String password,
         HttpServletResponse response) throws IOException, InterruptedException {
-        jwt = authenticationService.login(new AuthenticationRequest(username, password));
+        jwt = authenticationService.login(new User(username,password));
 
         Cookie jwtCookie = new Cookie("token", jwt.getJWT());
 

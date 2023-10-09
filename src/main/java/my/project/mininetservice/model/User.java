@@ -23,15 +23,13 @@ import lombok.Setter;
 import lombok.ToString;
 import my.project.mininetservice.util.Role;
 
-@Data
-@NoArgsConstructor
 @Entity
 @ToString
 @Table(name="USER_TABLE", schema = "public")
 @Getter
 @Setter
 public class User implements UserDetails {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long user_id;
@@ -43,8 +41,15 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role user_role;
 
+    public User(){}
+
+    public User (String username, String password) { //
+        this.username = username;
+        this.password = password;
+    }
+
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() { //What is it?
+    public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = user_role.getPermissions().stream()
         .map(permissionEnum -> new SimpleGrantedAuthority(permissionEnum.name()))
         .collect(Collectors.toList());
